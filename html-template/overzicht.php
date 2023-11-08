@@ -23,7 +23,7 @@
       <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 g-1 projects">
         <div id="project1" class="project card shadow-sm card-body m-2">
           <div class="card-text">
-            <h2>Titel van project 1.</h2>
+           <?php <h2>Titel van  1.</h2> ?>
             <div>Hier komt een korte omschrijving van het project.</div>
           </div>
           <div class="d-flex justify-content-between align-items-center mt-3">
