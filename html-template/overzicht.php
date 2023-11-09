@@ -1,3 +1,11 @@
+<?php
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+?>
+
+<?php include 'conection.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +18,21 @@
 </head>
 
 <body>
+
+<?php 
+  $stmt = $conn->prepare("SELECT * FROM project");
+  $stmt->execute();
+  $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+  foreach ($stmt->fetchALL() as $k=>$v) { ?>
+    <a href="detail.php?id=<?php echo $v; ["id"];?>">
+      < div class="project">
+            <h1>project <?php echo $v["title"];?></h1>
+      </div>
+    </a>
+  <?php } ?>
   <main>
+
+
     <div class="container">
       <div class="d-flex justify-content-center align-items-center m-4">
         <nav aria-label="search and filter">
@@ -20,10 +42,21 @@
             style="position: relative; vertical-align: top;">
         </nav>
       </div>
+
+
       <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 g-1 projects">
-        <div id="project1" class="project card shadow-sm card-body m-2">
+        
+      
+      <?php 
+
+    for ($a=0;$a<10;$a++){  
+        ?>
+      <div id="project1" class="project card shadow-sm card-body m-2">
+
           <div class="card-text">
-           <?php <h2>Titel van  1.</h2> ?>
+            <a href="detail.php?id=<?php echo $a; ?>">
+        <h1> Project <?php echo $a;  ?></h1> 
+
             <div>Hier komt een korte omschrijving van het project.</div>
           </div>
           <div class="d-flex justify-content-between align-items-center mt-3">
@@ -41,87 +74,9 @@
           </div>
         </div>
 
-        <div id="project1" class="project card shadow-sm card-body m-2">
-          <div class="card-text">
-            <h2>Titel van project 2.</h2>
-            <div>Hier komt een korte omschrijving van het project.</div>
-          </div>
-          <div class="d-flex justify-content-between align-items-center mt-3">
-            <div class="btn-group">
-              <button type="button" class="btn btn-sm btn-outline-secondary">
-                View
-              </button>
-              <button type="button" class="btn btn-sm btn-outline-secondary">
-                Edit
-              </button>
-              <button type="button" class="btn btn-sm btn-outline-secondary">
-                Delete
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div id="project1" class="project card shadow-sm card-body m-2">
-          <div class="card-text">
-            <h2>Titel van project 3.</h2>
-            <div>Hier komt een korte omschrijving van het project.</div>
-          </div>
-          <div class="d-flex justify-content-between align-items-center mt-3">
-            <div class="btn-group">
-              <button type="button" class="btn btn-sm btn-outline-secondary">
-                View
-              </button>
-              <button type="button" class="btn btn-sm btn-outline-secondary">
-                Edit
-              </button>
-              <button type="button" class="btn btn-sm btn-outline-secondary">
-                Delete
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div id="project1" class="project card shadow-sm card-body m-2">
-          <div class="card-text">
-            <h2>Titel van project 4.</h2>
-            <div>Hier komt een korte omschrijving van het project.</div>
-          </div>
-          <div class="d-flex justify-content-between align-items-center mt-3">
-            <div class="btn-group">
-              <button type="button" class="btn btn-sm btn-outline-secondary">
-                View
-              </button>
-              <button type="button" class="btn btn-sm btn-outline-secondary">
-                Edit
-              </button>
-              <button type="button" class="btn btn-sm btn-outline-secondary">
-                Delete
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div id="project1" class="project card shadow-sm card-body m-2">
-          <div class="card-text">
-            <h2>Titel van project 5.</h2>
-            <div>Hier komt een korte omschrijving van het project.</div>
-          </div>
-          <div class="d-flex justify-content-between align-items-center mt-3">
-            <div class="btn-group">
-              <button type="button" class="btn btn-sm btn-outline-secondary">
-                View
-              </button>
-              <button type="button" class="btn btn-sm btn-outline-secondary">
-                Edit
-              </button>
-              <button type="button" class="btn btn-sm btn-outline-secondary">
-                Delete
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
+        <?php }; ?>
+    
+        
       <div class="d-flex justify-content-center align-items-center m-4">
         <nav aria-label="Page navigation example">
           <ul class="pagination">
