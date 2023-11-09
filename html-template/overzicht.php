@@ -3,8 +3,7 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 ?>
-
-<?php include 'conection.php'; ?>
+<?php include 'conection.php';?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,9 +19,9 @@ error_reporting(E_ALL);
 <body>
 
 <?php 
-  $stmt = $conn->prepare("SELECT * FROM project");
+  $stmt = $conn->prepare("SELECT * FROM portfolio");
   $stmt->execute();
-  $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+  $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);  
   foreach ($stmt->fetchALL() as $k=>$v) { ?>
     <a href="detail.php?id=<?php echo $v; ["id"];?>">
       < div class="project">
