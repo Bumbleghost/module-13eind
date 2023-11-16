@@ -1,5 +1,4 @@
-<?php echo "test" ?>
-
+<?php include 'conection.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,10 +16,23 @@
       <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 g-1 projects">
         <div id="project1" class="project card shadow-sm card-body m-2">
           <div class="card-text">
-            <h2>Titel van project 1.</h2>
-            <div>Hier komt een <b>lange</b> omschrijving van het project.</div>
-            <div>Type: website</div>
-            <div>Jaar: 2023</div>
+
+            <?php 
+            $stmt = $conn->prepare("SELECT * FROM portfolio WHERE id = :id");
+            $stmt -> bindParam(':id',$_GET["id"]);
+
+            $stmt->execute();
+            $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            foreach ($stmt->fetchALL() as $k => $v)  ?>
+            
+                    <div id="project1" class="project card shadow-sm card-body m-2"><?php
+                    echo $v["id"];?><br><?php
+                    echo $v["title"];?><br><?php
+                    echo $v["lange-omschrijving"];?><br><?php
+                    echo $v["jaar"];?><br><?php
+                    echo $v["type"];?><br><?php
+                    echo '</div>';?>
+               </a> 
           </div>
         </div>
       </div>
