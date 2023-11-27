@@ -17,27 +17,59 @@ error_reporting(E_ALL);
 
 <body>
 
+
+  $zoekenop =
+
   <?php
   $stmt = $conn->prepare("SELECT * FROM portfolio");
   $stmt->execute();
   $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
   foreach ($stmt->fetchALL() as $k => $v) { ?>
-          <a href="detail.php?id=<?php echo $v["id"]; ?>"><div id="project1" class="project card shadow-sm card-body m-2"><?php
-          echo $v["id"];?><br><?php
-          echo $v["title"];?><br><?php
-          echo $v["lange-omschrijving"];?><br><?php
-          echo $v["jaar"];?><br><?php
-          echo $v["type"];?><br><?php
-          echo '</div>';?>
-     </a> 
+    <a href="detail.php?id=<?php echo $v["id"]; ?>">
+      <div id="project1" class="project card shadow-sm card-body m-2"><?php
+                                                                      echo $v["id"]; ?><br><?php
+                              echo $v["title"]; ?><br><?php
+                                  echo $v["lange-omschrijving"]; ?><br><?php
+                                              echo $v["jaar"]; ?><br><?php
+                                echo $v["type"]; ?><br><?php
+                                echo '</div>'; ?>
+    </a>
   <?php } ?>
   <main>
 
 
-    <div class="container">
+  
+  <form method="get" action="">
+    <input type="search" name="zoeken" placeholder="zoeken naar.... ">
+    <input type="submit" value="zoeken">
+  </form>
+
+  <?php
+
+  if (isset($_GET["zoeken"])) 
+  {
+      $zoekenop =  "%" .$_GET ["zoeken"]."%";
+      $stmt = $conn->prepare("SELECT* FORM portfolio WHERE title  LIKE :zoeken ORDER BY id DESC");
+      $stmt-> bindParam(':zoeken' , $zoekenop);
+  } 
+  else {
+      $stmt = $conn->prepare("SELECT * FROM portfolio");
+  }
+?>
+<?php
+  $stmt->execute();
+  $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+  foreach ($stmt->fetchAll() as $k => $v)
+?> 
+
+
+      <div class="container">
       <div class="d-flex justify-content-center align-items-center m-4">
         <nav aria-label="search and filter">
-          <input type="search" class="form-control ds-input" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-owns="algolia-autocomplete-listbox-0" dir="auto" style="position: relative; vertical-align: top;">
+          <input type="search" class="form-control ds-input" id="search-input" 
+          placeholder="Search..." aria-label="Search for..." autocomplete="off" spellcheck="false" 
+          role="combobox" aria-autocomplete="list" aria-expanded="false" aria-owns="algolia-autocomplete-listbox-0" 
+          dir="auto" style="position: relative; vertical-align: top;">
         </nav>
       </div>
 
@@ -48,7 +80,7 @@ error_reporting(E_ALL);
         <?php
 
         for ($a = 0; $a < 10; $a++) {
-          
+
         ?>
 
 
