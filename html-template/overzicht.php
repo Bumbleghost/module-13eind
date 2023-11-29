@@ -49,14 +49,14 @@ error_reporting(E_ALL);
   if (isset($_GET["zoeken"])) 
   {
       $zoekenop =  "%" .$_GET ["zoeken"]."%";
-      $stmt = $conn->prepare("SELECT* FORM portfolio WHERE title  LIKE :zoeken ORDER BY id DESC");
+      $stmt = $conn->prepare("SELECT* FROM portfolio WHERE title  LIKE :zoeken ORDER BY id DESC");
       $stmt-> bindParam(':zoeken' , $zoekenop);
   } 
   else {
       $stmt = $conn->prepare("SELECT * FROM portfolio");
   }
-?>
-<?php
+
+
   $stmt->execute();
   $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
   foreach ($stmt->fetchAll() as $k => $v)
